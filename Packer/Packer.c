@@ -1,6 +1,6 @@
 #include "Packer.h"
 
-UnitNode* head = NULL; // main pointer to head of ll
+UnitNode* head = NULL; 
 
 void Pack(char* input_files[], const char* output_file, int files_amount, const uint8_t encode_length, bool is_print_option) {
 	//needs to be big enough for large codetables
