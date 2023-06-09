@@ -1,11 +1,11 @@
 #include "Unpacker.h"
 
-CodeTable** codetable_array;
-UFile** file_array;
+CodeTable** codetable_array = NULL;
+UFile** file_array = NULL;
 Tree* root = NULL;
 
 void Unpack(const char* archive_name, char* directory_name) {
-	FILE* archive_pointer = fopen(archive_name, "rb");
+	FILE* archive_pointer = fopen(archive_name, "r");
 	uint8_t files_amount;
 	size_t codetable_s;
 	if (archive_pointer == NULL) {
@@ -20,7 +20,7 @@ void Unpack(const char* archive_name, char* directory_name) {
 		char output_filename[FILENAME_MAX] = {};
 		strcat(output_filename, directory_name);
 		strcat(output_filename, file_array[i]->filename);
-		FILE* ofile_pointer = fopen(output_filename, "wb+");
+		FILE* ofile_pointer = fopen(output_filename, "w+");
 		if (ofile_pointer == NULL) {
 			exit(printf("An error occurred while decoding\n"));
 		}
@@ -66,7 +66,7 @@ void ParseHeader(FILE* archive, size_t header_size, uint8_t* files_amount, size_
 			file_array[idx]->encode_length = atoi(delim_pointer);
 			delim_pointer = strtok(NULL, delimiter);
 			file_array[idx]->filename_length = atoi(delim_pointer);
-			delim_pointer = strtok(NULL, DIR_DELIMITER);
+			//delim_pointer = strtok(NULL, delimiter);
 			delim_pointer = strtok(NULL, delimiter);
 			strcpy(file_array[idx]->filename, delim_pointer);
 			delim_pointer = strtok(NULL, delimiter);

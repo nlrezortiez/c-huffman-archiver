@@ -16,10 +16,12 @@
 	#define BYTE_LENGTH 8
 #endif
 
-#define DIR_DELIMITER "/"
+
 
 #ifdef __WIN32__
     #define DIR_DELIMITER "\\"
+#else
+    #define DIR_DELIMITER "/"
 #endif 
 
 #ifndef MAX_HEIGHT
